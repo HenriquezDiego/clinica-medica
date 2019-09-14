@@ -56,8 +56,6 @@ namespace ClinicaMedica.DataAccess.Migrations
 
                     b.Property<string>("Dui");
 
-                    b.Property<string>("Email");
-
                     b.Property<DateTime>("FechaNacimiento");
 
                     b.Property<string>("Nit");
@@ -66,7 +64,11 @@ namespace ClinicaMedica.DataAccess.Migrations
 
                     b.Property<string>("Telefono");
 
+                    b.Property<int>("UsuarioId");
+
                     b.HasKey("DoctorId");
+
+                    b.HasIndex("UsuarioId");
 
                     b.ToTable("Doctores");
                 });
@@ -166,27 +168,23 @@ namespace ClinicaMedica.DataAccess.Migrations
                         .ValueGeneratedOnAdd()
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
+                    b.Property<int?>("CitaId");
+
                     b.Property<string>("Comentario");
 
                     b.Property<string>("Diagnostico");
 
-                    b.Property<int>("DoctorId");
-
-                    b.Property<decimal>("Estatura");
-
                     b.Property<DateTime>("Fecha");
 
-                    b.Property<int>("PacienteId");
+                    b.Property<decimal>("PasienteEstatura");
 
-                    b.Property<decimal>("Peso");
+                    b.Property<decimal>("PasientePeso");
 
                     b.Property<decimal>("PresionSanguinea");
 
                     b.HasKey("HistorialMedicoId");
 
-                    b.HasIndex("DoctorId");
-
-                    b.HasIndex("PacienteId");
+                    b.HasIndex("CitaId");
 
                     b.ToTable("HistorialesMedicos");
                 });
@@ -259,7 +257,11 @@ namespace ClinicaMedica.DataAccess.Migrations
 
                     b.Property<string>("TipoSangre");
 
+                    b.Property<int>("UsuarioId");
+
                     b.HasKey("PacienteId");
+
+                    b.HasIndex("UsuarioId");
 
                     b.ToTable("Pacientes");
                 });
@@ -298,6 +300,8 @@ namespace ClinicaMedica.DataAccess.Migrations
                         .ValueGeneratedOnAdd()
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
+                    b.Property<string>("Email");
+
                     b.Property<string>("Password");
 
                     b.Property<int>("RolId");
@@ -316,17 +320,25 @@ namespace ClinicaMedica.DataAccess.Migrations
                     b.HasOne("ClinicaMedica.DataAccess.Entities.Doctor", "Doctor")
                         .WithMany()
                         .HasForeignKey("DoctorId")
-                        .OnDelete(DeleteBehavior.Cascade);
+                        .OnDelete(DeleteBehavior.Restrict);
 
                     b.HasOne("ClinicaMedica.DataAccess.Entities.Estado", "EstadoCita")
                         .WithMany()
                         .HasForeignKey("EstadoCitaId")
-                        .OnDelete(DeleteBehavior.Cascade);
+                        .OnDelete(DeleteBehavior.Restrict);
 
                     b.HasOne("ClinicaMedica.DataAccess.Entities.Paciente", "Paciente")
                         .WithMany()
                         .HasForeignKey("PacienteId")
-                        .OnDelete(DeleteBehavior.Cascade);
+                        .OnDelete(DeleteBehavior.Restrict);
+                });
+
+            modelBuilder.Entity("ClinicaMedica.DataAccess.Entities.Doctor", b =>
+                {
+                    b.HasOne("ClinicaMedica.DataAccess.Entities.Usuario", "Usuario")
+                        .WithMany()
+                        .HasForeignKey("UsuarioId")
+                        .OnDelete(DeleteBehavior.Restrict);
                 });
 
             modelBuilder.Entity("ClinicaMedica.DataAccess.Entities.DoctorEspecialidad", b =>
@@ -334,12 +346,12 @@ namespace ClinicaMedica.DataAccess.Migrations
                     b.HasOne("ClinicaMedica.DataAccess.Entities.Doctor", "Doctor")
                         .WithMany()
                         .HasForeignKey("DoctorId")
-                        .OnDelete(DeleteBehavior.Cascade);
+                        .OnDelete(DeleteBehavior.Restrict);
 
                     b.HasOne("ClinicaMedica.DataAccess.Entities.Especialidad", "Especialidad")
                         .WithMany()
                         .HasForeignKey("EspecialidadId")
-                        .OnDelete(DeleteBehavior.Cascade);
+                        .OnDelete(DeleteBehavior.Restrict);
                 });
 
             modelBuilder.Entity("ClinicaMedica.DataAccess.Entities.Factura", b =>
@@ -347,44 +359,41 @@ namespace ClinicaMedica.DataAccess.Migrations
                     b.HasOne("ClinicaMedica.DataAccess.Entities.Paciente", "Paciente")
                         .WithMany()
                         .HasForeignKey("PacienteId")
-                        .OnDelete(DeleteBehavior.Cascade);
+                        .OnDelete(DeleteBehavior.Restrict);
                 });
 
             modelBuilder.Entity("ClinicaMedica.DataAccess.Entities.FacturaDetalle", b =>
                 {
                     b.HasOne("ClinicaMedica.DataAccess.Entities.Factura")
                         .WithMany("Detalles")
-                        .HasForeignKey("FacturaId");
+                        .HasForeignKey("FacturaId")
+                        .OnDelete(DeleteBehavior.Restrict);
 
                     b.HasOne("ClinicaMedica.DataAccess.Entities.Medicamento", "Medicamento")
                         .WithMany()
                         .HasForeignKey("MedicamentoId")
-                        .OnDelete(DeleteBehavior.Cascade);
+                        .OnDelete(DeleteBehavior.Restrict);
                 });
 
             modelBuilder.Entity("ClinicaMedica.DataAccess.Entities.HistorialMedico", b =>
                 {
-                    b.HasOne("ClinicaMedica.DataAccess.Entities.Doctor", "Doctor")
+                    b.HasOne("ClinicaMedica.DataAccess.Entities.Cita", "Cita")
                         .WithMany()
-                        .HasForeignKey("DoctorId")
-                        .OnDelete(DeleteBehavior.Cascade);
-
-                    b.HasOne("ClinicaMedica.DataAccess.Entities.Paciente", "Paciente")
-                        .WithMany()
-                        .HasForeignKey("PacienteId")
-                        .OnDelete(DeleteBehavior.Cascade);
+                        .HasForeignKey("CitaId")
+                        .OnDelete(DeleteBehavior.Restrict);
                 });
 
             modelBuilder.Entity("ClinicaMedica.DataAccess.Entities.HistorialMedicoDetalle", b =>
                 {
                     b.HasOne("ClinicaMedica.DataAccess.Entities.HistorialMedico")
                         .WithMany("Detalles")
-                        .HasForeignKey("HistorialMedicoId");
+                        .HasForeignKey("HistorialMedicoId")
+                        .OnDelete(DeleteBehavior.Restrict);
 
                     b.HasOne("ClinicaMedica.DataAccess.Entities.Medicamento", "Medicamento")
                         .WithMany()
                         .HasForeignKey("MedicamentoId")
-                        .OnDelete(DeleteBehavior.Cascade);
+                        .OnDelete(DeleteBehavior.Restrict);
                 });
 
             modelBuilder.Entity("ClinicaMedica.DataAccess.Entities.Medicamento", b =>
@@ -392,7 +401,15 @@ namespace ClinicaMedica.DataAccess.Migrations
                     b.HasOne("ClinicaMedica.DataAccess.Entities.UnidadMedida", "Unidad")
                         .WithMany()
                         .HasForeignKey("UnidadId")
-                        .OnDelete(DeleteBehavior.Cascade);
+                        .OnDelete(DeleteBehavior.Restrict);
+                });
+
+            modelBuilder.Entity("ClinicaMedica.DataAccess.Entities.Paciente", b =>
+                {
+                    b.HasOne("ClinicaMedica.DataAccess.Entities.Usuario", "Usuario")
+                        .WithMany()
+                        .HasForeignKey("UsuarioId")
+                        .OnDelete(DeleteBehavior.Restrict);
                 });
 
             modelBuilder.Entity("ClinicaMedica.DataAccess.Entities.Usuario", b =>
@@ -400,7 +417,7 @@ namespace ClinicaMedica.DataAccess.Migrations
                     b.HasOne("ClinicaMedica.DataAccess.Entities.Rol", "Rol")
                         .WithMany()
                         .HasForeignKey("RolId")
-                        .OnDelete(DeleteBehavior.Cascade);
+                        .OnDelete(DeleteBehavior.Restrict);
                 });
 #pragma warning restore 612, 618
         }

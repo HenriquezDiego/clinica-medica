@@ -1,4 +1,5 @@
-﻿using ClinicaMedica.DataAccess.Entities;
+﻿using System.Linq;
+using ClinicaMedica.DataAccess.Entities;
 using Microsoft.EntityFrameworkCore;
 
 namespace ClinicaMedica.DataAccess.Persistence
@@ -24,6 +25,15 @@ namespace ClinicaMedica.DataAccess.Persistence
         {
             optionsBuilder.UseSqlServer(
                 "server=localhost;Database=ClinicaDbV1.0.0;Integrated Security=true;MultipleActiveResultSets=true;");
+        }
+
+        protected override void OnModelCreating(ModelBuilder modelBuilder)
+        {
+            foreach (var relationship in modelBuilder.Model.GetEntityTypes()
+                .SelectMany(e => e.GetForeignKeys()))
+            {
+                relationship.DeleteBehavior = DeleteBehavior.Restrict;
+            }
         }
     }
 }
