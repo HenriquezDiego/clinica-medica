@@ -3,9 +3,28 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 15
 VisualStudioVersion = 15.0.28307.852
 MinimumVisualStudioVersion = 10.0.40219.1
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "src", "src", "{ECAEFFE1-0413-442A-8B9E-B4362A91911D}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "test", "test", "{D915958E-0C5E-415B-A5D6-7D03D9706F79}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ClinicaMedica.DataAccess", "src\ClinicaMedica.DataAccess\ClinicaMedica.DataAccess.csproj", "{0FBB4E55-8F6A-419F-867A-FDB239E9E62E}"
+EndProject
 Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{0FBB4E55-8F6A-419F-867A-FDB239E9E62E}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{0FBB4E55-8F6A-419F-867A-FDB239E9E62E}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{0FBB4E55-8F6A-419F-867A-FDB239E9E62E}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{0FBB4E55-8F6A-419F-867A-FDB239E9E62E}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{0FBB4E55-8F6A-419F-867A-FDB239E9E62E} = {ECAEFFE1-0413-442A-8B9E-B4362A91911D}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {5271CFF7-14D6-48E6-A7CC-C57F06D2809C}
