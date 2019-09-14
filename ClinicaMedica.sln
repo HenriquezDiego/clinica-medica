@@ -7,7 +7,7 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "src", "src", "{ECAEFFE1-041
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "test", "test", "{D915958E-0C5E-415B-A5D6-7D03D9706F79}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ClinicaMedica.DataAccess", "src\ClinicaMedica.DataAccess\ClinicaMedica.DataAccess.csproj", "{0FBB4E55-8F6A-419F-867A-FDB239E9E62E}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ClinicaMedica.DataAccess", "src\ClinicaMedica.DataAccess\ClinicaMedica.DataAccess.csproj", "{0FBB4E55-8F6A-419F-867A-FDB239E9E62E}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
