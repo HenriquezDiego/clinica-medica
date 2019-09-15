@@ -16,7 +16,5 @@ namespace ClinicaMedica.DataAccess.Entities
         public string Direccion { get; set; }
         public string TipoSangre { get; set; }
         public string AlergicoA { get; set; }
-        public int UsuarioId { get; set; }
-        public Usuario Usuario { get; set; }
     }
 }
