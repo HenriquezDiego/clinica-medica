@@ -7,6 +7,7 @@ namespace ClinicaMedica.DataAccess.Entities
         public int PacienteId { get; set; }
         public string Nombre { get; set; }
         public string Apellido { get; set; }
+        public bool Genero { get; set; }
         public DateTime FechaNacimiento { get; set; }
         public string Dui { get; set; }
         public string Nit { get; set; }
@@ -14,7 +15,7 @@ namespace ClinicaMedica.DataAccess.Entities
         public string Email { get; set; }
         public string Direccion { get; set; }
         public string TipoSangre { get; set; }
-        public bool Genero { get; set; }
+        public string AlergicoA { get; set; }
         public int UsuarioId { get; set; }
         public Usuario Usuario { get; set; }
     }

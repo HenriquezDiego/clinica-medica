@@ -6,7 +6,6 @@ namespace ClinicaMedica.DataAccess.Entities
     public class Factura
     {
         public int FacturaId { get; set; }
-        public string Prefijo  { get; set; }
         public  string Correlativo { get; set; }
         public string Comentario  { get; set; }
         public string Paciente { get; set; }
